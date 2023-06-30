@@ -35,18 +35,18 @@ def find_between(text, first, last):
 
 ##### GDS Path Parameters #####
 
-all_cells_file="/Users/Henry Mackay/Desktop/layout/cell_src/1T1R_EBL_cells_ex.gds" #Gds containing all devices to be tiled as subcells
+all_cells_file="./example_tiling/1T1R_EBL_cells_ex.gds" #Gds containing all devices to be tiled as subcells
 created_containing_cell_name="1T1R_EBL_placed_transistors" #Topcell name for output gds
-output_file="/Users/Henry Mackay/Desktop/layout/1T1R_EBL_tiled_example.gds" #Output file path
+output_file="./example_tiling/1T1R_EBL_tiled_example.gds" #Output file path
 
 
 ########## Alignment Cross Parameters ##########
   
 place_cross=True
-marker_cell_file="/Users/Henry Mackay/Desktop/layout/Cross_1.gds" #File for alignement cross, lower left corner should be placed at the origin
-marker_name="Cross"
-num_markers=3
-marker_coords_x = [0,10*1000,20*1000]
+marker_cell_file="./example_tiling/markers.gds" #File for alignement cross, lower left corner should be placed at the origin
+marker_name="Cross_!" # Name of the cell with the marker to use 
+num_markers=3 # Number of markers to be placed
+marker_coords_x = [0,10*1000,20*1000]  #coordinates for markers upon initial placement, 
 marker_coords_y = [75*1000,75*1000,75*1000] 
 
 ########## General Subcell Parameters ##########
@@ -54,7 +54,7 @@ marker_coords_y = [75*1000,75*1000,75*1000]
 #Coordinates for alignement crosses are based on lower left corner of the cross cell
 
 
-#length and width of transistor subcell in nm
+#length and width of tile subcell in nm
 y_pitch=68 * 1000 
 x_pitch=280 * 1000
 num_t_across=7 #number of tiles to placed across 
@@ -68,7 +68,7 @@ y_gap=40*1000
 
 add_text=True
 custom_font=False
-font_file="/Users/Henry Mackay/Documents/1T1R_UPDATE/Large_Placement/block_via_font.gds"
+font_file="./example_tiling/block_via_font.gds"
 # Where the lower left hand corner of the text is placed
 text_x=0
 text_y=68.01000*1000
@@ -76,7 +76,7 @@ text_y=68.01000*1000
 text_layer_n=255
 #size of placed text
 txt_size=16
-label="1T1R"
+label="1T1R" #label is used at the beginning of every text label ie "1T1R W32 L100 NMOS..." etc
 
 #NOTE: When determining parameters for cell placement, the program excepts cells to named as such:
 # label_w_l_type_voltage_
