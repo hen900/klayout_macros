@@ -43,9 +43,11 @@ custom_font: Whether or not to use a custom font for the text labels.
 
 ## Marker Placement 
 
-While parameters exist for marker placement, 
+While parameters exist for marker placement,  they can also be placed at an arbitrary location at first and then moved into place manually.
+The instaning of the markers is such that they only have to adjusted for one cell ; all other cellls will inherhit that placement.
+
 ## Example Files
 
 Some gds files are provided to demonstrate this macro's functionality. Two libraries of cells are provided which can be loaded and tiled any which way by the user.
-Additionally, a marker file is provided with three different marker tpes
+Additionally, a marker file is provided with three different marker types. Set the marker with the marker_name parameter.
 
