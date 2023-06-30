@@ -6,27 +6,16 @@ import re
 from os.path import exists
 
 
-#helper function used to extract parameters from subcells
-def find_between(text, first, last):
-  start = text.find(first) + len(first)
-  end = text.find(last, start)
-  return str(text[start:end]) if start != -1 and end != -1 else None
-
-
-
-
 # This python script is meant to run as a macro in klayout 
 
 ####
 #    Tiling script used to place transistors or other test devices into one layout
 #    This script relies on an existing gds for alignment marks (if they are being 
-#    used) and all devices loaded into one gds.Intructions on importing individual
-#    device gds files into one file containing all devices as subcells can be found here:
+#    used) and all devices loaded into one gds.
 #    
-
 #    NOTE: 
 #    All coordinates are in the form value_in_um*1000. This is for converting um 
-#    measurements into database unites
+#    measurements into nm database units
 ####
 
 
@@ -85,6 +74,15 @@ label="1T1R" #label is used at the beginning of every text label ie "1T1R W32 L1
 
 ##################################### END PARAMS ##################################### 
 
+
+
+#helper function used to extract parameters from subcells
+def find_between(text, first, last):
+  start = text.find(first) + len(first)
+  end = text.find(last, start)
+  return str(text[start:end]) if start != -1 and end != -1 else None
+
+
 def main():
  test= exists(all_cells_file)
  if not test:
@@ -119,7 +117,6 @@ def main():
  ny=0
  counter=0
 
-
  #Create KLayout object
  KLAYOUT = pya.Layout()
  
@@ -150,12 +147,9 @@ def main():
          nx=0
          ny=ny+1
          dx=0
-         dy=(y_pitch+y_gap)*ny
-
-       
+         dy=(y_pitch+y_gap)*ny       
        nx=nx+1
        dx=(x_pitch+x_gap)*nx
-
   
        #new_instance = pya.CellInstArray( cell_index, pya.Trans(pya.Vector(dx,dy)), pya.Vector(x_pitch, 0), pya.Vector(0, y_pitch), 1, 0 )
        new_instance = pya.CellInstArray( cell_index, pya.Trans(pya.Point(dx,dy)))
