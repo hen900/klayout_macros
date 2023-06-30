@@ -1,13 +1,14 @@
-## Tiling Script for KLayout
+# Tiling Script for KLayout
 This Python script can be used to tile transistors or other test devices into one layout. The script relies on an existing gds for alignment marks (if they are being used) and all devices loaded into one gds. Instructions on importing individual device gds files into one file containing all devices as subcells can be found here:
 
 https://www.klayout.de/doc/code/class_Cell.html
 
 
 
-## Usage
+## Usage/Parameters
 
-The script takes the following user-editable parameters:
+The script takes the following user-editable parameters that are currently set as variables at the front end of the scirpt:
+
 
 ### GDS Path Parameters
 
@@ -39,3 +40,12 @@ custom_font: Whether or not to use a custom font for the text labels.
 * text_layer_n: The layer number of the text labels.
 * txt_size: The size of the text labels, in pixels.
 * label: The text label prefix.
+
+## Marker Placement 
+
+While parameters exist for marker placement, 
+## Example Files
+
+Some gds files are provided to demonstrate this macro's functionality. Two libraries of cells are provided which can be loaded and tiled any which way by the user.
+Additionally, a marker file is provided with three different marker tpes
+
