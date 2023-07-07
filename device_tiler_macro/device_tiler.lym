@@ -21,6 +21,22 @@ import re
 from os.path import exists
 
 
+# This python script is meant to run as a macro in klayout 
+
+####
+#    Tiling script used to place transistors or other test devices into one layout
+#    This script relies on an existing gds for alignment marks (if they are being 
+#    used) and all devices loaded into one gds.Intructions on importing individual
+#    device gds files into one file containing all devices as subcells can be found here:
+#    
+
+#    NOTE: 
+#    All coordinates are in the form value_in_um*1000. This is for converting um 
+#    measurements into database units
+#    
+#    Coordinates always refer to the lower left corner of a given object
+#
+####
 
 
 def output_dir_diag():
@@ -179,9 +195,10 @@ def find_between(s, first, last):
     except ValueError:
         return ""
 
-local_path=os.path.dirname(os.path.abspath(__file__)) + "\\tiling_GUI.ui"
+local_path=os.getcwd() + "\\tiling_GUI.ui"
 ui_file = pya.QFile(local_path)
 ui_file.open(pya.QFile.ReadOnly)
+print(pya.CellView.active.filename)
 if (not ui_file.exists() ):
   print(local_path  + " not found")
   print("Error: Failed to load user interface")

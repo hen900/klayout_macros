@@ -1,0 +1,83 @@
+Python GUI Tiling Program Documentation
+This is an extensive documentation for a Python program that utilizes a GUI (Graphical User Interface) to perform tiling operations on layout files in KLayout. The program allows the user to specify various parameters for tiling and generates a new layout file as output.
+
+Program Overview
+The program is designed to run as a macro within the KLayout layout editor. It automates the process of placing transistors or other test devices into a layout by tiling them according to user-defined parameters. The program relies on an existing GDS (Graphic Data System) file for alignment marks (if they are being used) and a single GDS file containing all the individual device cells that need to be tiled.
+
+Installation and Prerequisites
+KLayout: The program requires the KLayout layout editor to be installed on the system.
+Python: The program is written in Python and requires a Python interpreter to run.
+Dependencies: The program uses the pya module for interacting with KLayout and the os module for file operations.
+Running the Program
+To run the program, follow these steps:
+
+Open KLayout and load the layout file in which you want to perform tiling.
+Go to the "Macros" menu in KLayout and select the "Run" option.
+Browse and select the Python script file containing the program.
+The GUI window for the tiling program will open.
+Specify the required parameters in the GUI.
+Click the "OK" button to start the tiling process.
+The program will perform the tiling operation and generate a new layout file as output.
+GUI Interface
+The program utilizes a graphical user interface (GUI) to provide an intuitive and user-friendly way of specifying tiling parameters. The GUI window consists of various input fields, checkboxes, buttons, and text labels. Here is an overview of the different elements in the GUI:
+
+Output Directory
+Description: The directory where the output file will be written.
+Input: Button to open a file dialog for selecting the output directory.
+Default: None.
+Marker File
+Description: The file containing the marker to be used for alignment (optional).
+Input: Button to open a file dialog for selecting the marker file.
+Default: None.
+All Cells File
+Description: The file containing all the individual cells to be tiled.
+Input: Button to open a file dialog for selecting the file.
+Default: None.
+Custom Font File
+Description: The file containing a custom font to be used (optional).
+Input: Button to open a file dialog for selecting the font file.
+Default: None.
+Tiling Parameters
+Place Markers: Checkbox to enable/disable the placement of markers for alignment.
+Marker Name: Text input field to specify the name of the marker.
+Output Name: Text input field to specify the name of the output file.
+Number of Markers: Text input field to specify the number of markers to be placed.
+Marker Coordinates (X, Y): Text input fields to specify the X and Y coordinates of the markers.
+Marker Gap: Text input field to specify the gap between consecutive markers.
+Y Pitch: Text input field to specify the vertical pitch between cells.
+X Pitch: Text input field to specify the horizontal pitch between cells.
+Number of Tiles Across: Text input field to specify the number of tiles across the layout.
+X Gap: Text input field to specify the horizontal gap between tiles.
+Y Gap: Text input field to specify the vertical gap between tiles.
+Add Text: Checkbox to enable/disable the placement of text labels.
+Text Coordinates (X, Y): Text input fields to specify the X and Y coordinates of the text labels.
+Text Layer Number: Text input field to specify the layer number for the text labels.
+Text Size: Text input field to specify the size of the text labels.
+Label: Text input field to specify the label for the text labels.
+Buttons
+Output Directory Button: Opens a file dialog for selecting the output directory.
+Marker File Button: Opens a file dialog for selecting the marker file.
+All Cells File Button: Opens a file dialog for selecting the file containing all the cells.
+Custom Font File Button: Opens a file dialog for selecting the custom font file.
+OK Button: Initiates the tiling process using the specified parameters.
+Tiling Process
+The tiling process performed by the program involves several steps to place the cells and markers in the layout. Here is an overview of the tiling process:
+
+Read the user-specified marker file and extract the required marker cells.
+Read the file containing all the cells to be tiled.
+Create a new top cell in the layout for the output.
+Iterate over each cell in the input file:
+Insert the cell into the output layout using the specified pitch and gap parameters.
+If enabled, place the markers at the specified coordinates with the specified gap.
+If enabled, place text labels with the specified parameters.
+Export the resulting layout as a GDS file in the specified output directory.
+Helper Functions
+The program includes some helper functions to assist in the tiling process:
+
+output_dir_diag(): Opens a file dialog to select the output directory and sets the selected directory as the output directory.
+marker_file_diag(): Opens a file dialog to select the marker file and sets the selected file as the marker file.
+all_cells_file_diag(): Opens a file dialog to select the file containing all the cells and sets the selected file as the input file.
+font_file_diag(): Opens a file dialog to select the custom font file and sets the selected file as the font file.
+run_tiling(): Executes the tiling process using the specified parameters.
+Conclusion
+This Python program provides a convenient way to perform tiling operations on layout files using a GUI in KLayout. By specifying the desired parameters, the program automates the process of placing cells and markers in a layout, simplifying the design workflow. With the provided documentation, users can easily understand and utilize the program to achieve their tiling requirements efficiently.
