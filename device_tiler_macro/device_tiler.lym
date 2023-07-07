@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<klayout-macro>
+ <description/>
+ <version/>
+ <category>pymacros</category>
+ <prolog/>
+ <epilog/>
+ <doc/>
+ <autorun>false</autorun>
+ <autorun-early>false</autorun-early>
+ <shortcut/>
+ <show-in-menu>true</show-in-menu>
+ <group-name/>
+ <menu-path>macros_menu.end</menu-path>
+ <interpreter>python</interpreter>
+ <dsl-interpreter-name/>
+ <text>import pya
+import os
+import sys 
+import re
+from os.path import exists
+
+
+
+
+def output_dir_diag():
+      window.output_dir  = pya.QFileDialog.getExistingDirectory(None, "Select the directory you would like to write the output file to", "")
+      window.output_dir_disp.setText(window.output_dir)
+
+def marker_file_diag():
+      window.marker_file = pya.QFileDialog.getOpenFileName(None, "Select the file containing the marker you would like to use", "", "*.gds")
+      window.marker_file_disp.setText(window.marker_file)
+
+def all_cells_file_diag():
+      window.all_cells_file  = pya.QFileDialog.getOpenFileName(None, "Select the file containing the cells you would like to tile", "", "*.gds")
+      window.all_cells_disp.setText(window.all_cells_file)
+
+def font_file_diag():
+      window.font_file  = pya.QFileDialog.getOpenFileName(None, "Select the file with your custom font", "", "*.gds")
+      window.font_file_disp.setText(window.font_file)
+
+def run_tiling():
+
+      window.marker_file="Markers not placed"
+      window.font_file="Custom font not used"
+
+      place_markers = window.place_markers.isChecked()
+      marker_name = window.marker_name.text
+      output_name = window.output_name.text
+      num_markers = int(window.num_markers.text)
+      marker_coords_x = float(window.marker_coords_x.text) * 1000
+      marker_coords_y = float(window.marker_coords_y.text) * 1000
+      marker_gap = float(window.gap.text) * 1000
+      y_pitch = float(window.y_pitch.text) * 1000
+      x_pitch = float(window.x_pitch.text) * 1000
+      num_t_across = int(window.num_t_across.text)
+      x_gap = float(window.x_gap.text) * 1000
+      y_gap = float(window.y_gap.text) * 1000
+      place_text = window.add_text.isChecked()
+      text_x = float(window.text_x.text) * 1000
+      text_y = float(window.text_y.text) * 1000
+      text_layer_n = int(window.text_layer_n.text)
+      text_size = int(window.text_size.text)
+      label = window.label.text
+
+      output_file = window.output_dir + "/" + output_name + ".gds"
+
+      print("############################################")
+      print("place_markers =", place_markers)
+      print("marker_name =", marker_name)
+      print("num_markers =", num_markers)
+      print("marker_coords_x =", marker_coords_x)
+      print("marker_coords_y =", marker_coords_y)
+      print("marker_gap =", marker_gap)
+      print("y_pitch =", y_pitch)
+      print("x_pitch =", x_pitch)
+      print("num_t_across =", num_t_across)
+      print("x_gap =", x_gap)
+      print("y_gap =", y_gap)
+      print("place_text =", place_text)
+      print("text_x =", text_x)
+      print("text_y =", text_y)
+      print("text_layer_n =", text_layer_n)
+      print("text_size =", text_size)
+      print("label =", label)
+      print("output_file =", output_file)
+      print("marker_file =", window.marker_file)
+      print("all_cells_file =", window.all_cells_file)
+
+      print("############################################")
+      print("Importing cells ...")
+      if window.font_file:
+          print("Importing font ...")
+
+      print("Starting Tiling ...")
+
+      # Helper variables for placement
+      dx = 0
+      dy = 0
+      nx = 0
+      ny = 0
+      counter = 0
+
+      # Create KLayout object
+      KLAYOUT = pya.Layout()
+
+      # Read Top Cell for each GDS file
+      TOP_CELL = KLAYOUT.create_cell(output_name)
+      KLAYOUT.read(window.all_cells_file)
+
+      if place_markers:
+          KLAYOUT.read(window.marker_file)
+          for t in KLAYOUT.top_cells():
+              if t.name != marker_name:
+                  t.delete()
+
+          marker0 = KLAYOUT.cell(marker_name)
+          marker_cells = [pya.Cell] * num_markers
+          marker_cells[0] = marker0
+
+          for m in range(1, num_markers):
+              marker_cells[m] = marker0.dup()
+
+      for top_cell_read in KLAYOUT.top_cells():
+          if top_cell_read.name != output_name and marker_name not in top_cell_read.name:
+              # Don't insert TOP_CELL on itself
+              counter += 1
+              cell_index = top_cell_read.cell_index()
+
+              if nx == num_t_across:
+                  nx = 0
+                  ny = ny + 1
+                  dx = 0
+                  dy = (y_pitch + y_gap) * ny
+              nx = nx + 1
+              dx = (x_pitch + x_gap) * nx
+              new_instance = pya.CellInstArray(cell_index, pya.Trans(pya.Point(dx, dy)))
+              TOP_CELL.insert(new_instance)
+
+              if place_markers:
+                  space = 0
+                  for m in range(0, num_markers):
+                      top_cell_read.insert(pya.CellInstArray.new(marker_cells[m].cell_index(), pya.Trans.new(pya.Point(marker_coords_x + space, marker_coords_y))))
+                      space = space + (marker_gap * 1000)
+
+              if place_text:
+                  name = top_cell_read.name
+                  try:
+                      width = str(find_between(name, "_w", "_l"))
+                      length = str(find_between(name, str(width) + "_l", "_"))
+                      typ = find_between(name, "l" + str(length) + "_", "_")
+                      voltage = str(find_between(name, str(typ) + "_", "V_"))
+                      typ = str(typ.upper())
+                      lum_lib_text = label + " " + "W" + width + " L" + length + " " + typ + " " + voltage + "V"
+                  except AttributeError or TypeError:
+                      print("RUN FAILURE!")
+                      raise AttributeError("Error Extracting parameters from cell names..\nMake sure cells to be tiled are named according to the text finding function.")
+
+                  # Layer text is to be placed on
+                  text_layer = pya.LayerInfo(text_layer_n, 0)
+                  KLAYOUT.layer(text_layer)
+
+                  # Instantiate and create text pcell
+                  param = {"layer": text_layer, "text": lum_lib_text, "mag": text_size}
+                  text_cell = KLAYOUT.create_cell("TEXT", "Basic", param)
+
+                  text_trans = pya.Trans(0, False, text_x, text_y)
+                  top_cell_read.insert(pya.CellInstArray.new(text_cell.cell_index(), text_trans))
+
+      # Export GDS file
+      KLAYOUT.write(output_file)
+      window.close()
+      
+def find_between(s, first, last):
+    try:
+        start = s.index(first) + len(first)
+        end = s.index(last, start)
+        return s[start:end]
+    except ValueError:
+        return ""
+
+local_path=os.path.dirname(os.path.abspath(__file__)) + "\\tiling_GUI.ui"
+ui_file = pya.QFile(local_path)
+ui_file.open(pya.QFile.ReadOnly)
+if (not ui_file.exists() ):
+  print(local_path  + " not found")
+  print("Error: Failed to load user interface")
+  
+else:
+  loader=pya.QUiLoader()
+  
+  window=loader.load(ui_file)
+  
+  window.output_dir_btn.clicked(output_dir_diag)
+  window.marker_file_btn.clicked(marker_file_diag)
+  window.all_cells_file_btn.clicked(all_cells_file_diag)
+  window.font_file_btn.clicked(font_file_diag)
+  window.ok.clicked(run_tiling)      
+  
+  window.show()
+
+
+
+
+
+
+
+</text>
+</klayout-macro>
