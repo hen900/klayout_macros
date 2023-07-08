@@ -12,13 +12,22 @@ To run the program, follow these steps:
 2. Add the location of the `device_tiler_macro` directory downloaded from GitHub.
 3. The Macro should now appear when hovering over the "Macro" bar at the top.
 
+![alt text](https://github.com/hen900/klayout_macros/blob/main/img_docs/importing_macro.jpg?raw=true)
+
+
 > **Note on KLayout Coordinate System**  
 > Throughout the entirety of this program and documentation, whenever an object is referenced by its coordinates, the values for x and y are based on the position of the **lower left-hand corner** of the object and referred to in microns.
 
 ---
+### Example GUI Dialog
+
+![alt text](https://github.com/hen900/klayout_macros/blob/main/img_docs/input_params.jpg?raw=true)
+> Above is an example of the parameter dialog and the corresponding output generated
 
 ### Cell Placement
 
+![alt text](?raw=true)
+![alt text](?raw=true)
 **X Gap:** Field to specify the horizontal gap between tiles (um).  
 
 **Y Gap:** Field to specify the vertical gap between tiles (um).  
@@ -26,20 +35,25 @@ To run the program, follow these steps:
 **Y Pitch:** Field to specify the vertical height of each subcell to be tiled (um).  
 
 **X Pitch:** Field to specify the width of each subcell to be tiled (um).
+![alt text](https://github.com/hen900/klayout_macros/blob/main/img_docs/ez_cell_params.jpg?raw=true)
 
 ---
 
 ### Marker Placement
-Markers are placed in a horizontal line originating at the specified coordinates.
 
 **Marker Name:** Text input field to specify the name of the marker to be used.
-> This assumes a cell with the marker name exists in the marker file.
+* This assumes a cell with the marker name exists in the marker file.
 
 **Marker Coordinates (X, Y):** Fields to specify the placement of markers in **um**.
 
-> Markers will be placed in a line, and this specifies where the lower left coordinate of the line of markers should be.
+* Markers will be placed in a line, and this specifies where the lower left coordinate of the line of markers should be.
 
 **Marker Gap:** Field to specify the desired horizontal gap between consecutive markers in um.
+![alt text](https://github.com/hen900/klayout_macros/blob/main/img_docs/marker_placement.jpg?raw=true)
+
+### Marker Movement In Output
+
+![alt text](https://github.com/hen900/klayout_macros/blob/main/img_docs/marker_movement.jpg?raw=true)
 
 ---
 
