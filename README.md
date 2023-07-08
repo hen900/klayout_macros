@@ -34,7 +34,8 @@ Markers are placed in a horizontal line originating at the coordinates specified
 >  **IMPORTANT NOTE** <br> Default text parameter extraction expects to tile a set of cells labeled as something like: <br> 
 > `x1T1R_w100_l50_pmos_1_8V_EBL` <br>
 >  where the width length, type and voltage are are extracted based on cell names and then used for labeling. It is likely that the user will have to edit the parameter extraction of the script and utilize the included `find_between` function to readjust the name to match other cell naming conventions
-<br> **Text Coordinates (X, Y):** Fields to specify the X and Y coordinates of the **lower left corner** of the placed text
+<br>
+**Text Coordinates (X, Y):** Fields to specify the X and Y coordinates of the **lower left corner** of the placed text
 
 
 ### Other Parameters
