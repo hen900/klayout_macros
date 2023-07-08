@@ -20,9 +20,9 @@ To run the program, follow these steps:
 **X Pitch:** Field to specify the width of each subcell to be tiled (um).
 
 ### Marker Placement
-Markers are placed in a horizontal line originating at the coordinates specified. <br>
+Markers are placed in a horizontal line originating at the coordinates specified. <br> <br>
 **Marker Name:** Text input field to specify the name of the marker to be used.
-> This assumes a cell by the marker name exists in the marker file. 
+> This assumes a cell by the marker name exists in the marker file.
 **Marker Coordinates (X, Y):** Fields to specify the placement of markers in **um**.
 > Markers will be placed in a line, and this specifies where the lower left coordinate of the line of markers should be. 
 **Marker Gap:** Field to specify the desired horizontal gap between consecutive markers in um.
@@ -32,8 +32,8 @@ Markers are placed in a horizontal line originating at the coordinates specified
 
 ### Text Placement 
 >  **IMPORTANT NOTE** <br> Default text parameter extraction expects to tile a set of cells labeled as something like: <br> 
->  `x1T1R_w100_l50_pmos_1_8V_EBL` <br>
->  where the width length, type and voltage are are extracted based on cell names and then used for labeling. It is likely that the user will have to edit the parameter extraction of the script and utilize the included `find_between` function to readjust the name to match other cell naming conventions  
+> `x1T1R_w100_l50_pmos_1_8V_EBL` <br>
+>  where the width length, type and voltage are are extracted based on cell names and then used for labeling. It is likely that the user will have to edit the parameter extraction of the script and utilize the included `find_between` function to readjust the name to match other cell naming conventions  <br>
 **Text Coordinates (X, Y):** Fields to specify the X and Y coordinates of the **lower left corner** of the placed text
 
 
