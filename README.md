@@ -26,8 +26,6 @@ To run the program, follow these steps:
 
 ### Cell Placement
 
-![alt text](?raw=true)
-![alt text](?raw=true)
 **X Gap:** Field to specify the horizontal gap between tiles (um).  
 
 **Y Gap:** Field to specify the vertical gap between tiles (um).  
