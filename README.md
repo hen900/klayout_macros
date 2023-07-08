@@ -10,8 +10,9 @@ To run the program, follow these steps:
 2. Add the location of the device_tiler_macro directory downloaded from github
 3. The Macro should now appear when hovering over the "Macro" bar up top
 
-#### Klayout Coordinate System
-Throughout the entirety of this program and documentation, any tine an object is referenced by its coordinates, the values for x and y are based on the position of the **lower left hand corner** of the object and referred to in microns.
+>  **Note on Klayout Coordinate System**
+>  Throughout the entirety of this program and documentation, any tine an object is referenced by its coordinates, the values for x and y are based on the position of the **lower left hand corner** of the object an referred to in microns.
+
 ### Cell Placement
 **X Gap:** Field to specify the horizontal gap between tiles (um).  <br>
 **Y Gap:** Field to specify the vertical gap between tiles (um). <br>
@@ -20,21 +21,20 @@ Throughout the entirety of this program and documentation, any tine an object is
 
 ### Marker Placement
 Markers are placed in a horizontal line originating at the coordinates specified. <br>
-**Marker Name:** Text input field to specify the name of the marker to be used.  <br>
-> This assumes a cell by the marker name exists in the marker file. <br>
+**Marker Name:** Text input field to specify the name of the marker to be used.
+> This assumes a cell by the marker name exists in the marker file. 
 **Marker Coordinates (X, Y):** Fields to specify the placement of markers in **um**. <br>
-> Markers will be placed in a line, and this specifies where the lower left coordinate of the line of markers should be. <br>
-**Marker Gap:** Field to specify the desired horizontal gap between consecutive markers in um. <br>
+> Markers will be placed in a line, and this specifies where the lower left coordinate of the line of markers should be. 
+**Marker Gap:** Field to specify the desired horizontal gap between consecutive markers in um.
 
 
 
 
 ### Text Placement 
->  **IMPORTANT NOTE** Default text parameter extraction expects to tile a set of cells labeled as something like:  <br>
->  `x1T1R_w100_l50_pmos_1_8V_EBL` <br>
->  where the width length, type and voltage are are extracted based on cell names and then used for labeling.
->  It is likely that the user will have to edit the parameter extraction of the script and utilize the included
->  `find_between` function to readjust the name to match other cell naming conventions  <br>
+>  **IMPORTANT NOTE** Default text parameter extraction expects to tile a set of cells labeled as something like: 
+>  `x1T1R_w100_l50_pmos_1_8V_EBL` 
+>  where the width length, type and voltage are are extracted based on cell names and then used for labeling. It is likely that the user will have to edit the parameter extraction of the script and utilize the included
+ `find_between` function to readjust the name to match other cell naming conventions  
 **Text Coordinates (X, Y):** Fields to specify the X and Y coordinates of the **lower left corner** of the placed text
 
 
