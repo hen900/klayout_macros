@@ -1,4 +1,4 @@
-# Python GUI Tiling Program Documentation
+# Klayout Tiling Program
 
 ## Program Overview
 The program is designed to run as a macro within the KLayout layout editor. It automates the process of placing transistors or other test devices into a layout by tiling them according to user-defined parameters. The program relies on an existing GDS (Graphic Data System) file for alignment marks (if they are being used) and a single GDS file containing all the individual device cells that need to be tiled.
