@@ -8,9 +8,10 @@ The program is designed to run as a macro within the KLayout layout editor. It a
 ## Running the Program
 To run the program, follow these steps:
 
-1. Open the "Macro Development" menu in KLayout and select the "Add Location" option using right-click.
-2. Add the location of the `device_tiler_macro` directory downloaded from GitHub.
-3. The Macro should now appear when hovering over the "Macro" bar at the top.
+1. Clone this repository
+2. Open the "Macro Development" menu in KLayout and select the "Add Location" option using right-click.
+3. Add the location of the `device_tiler_macro` directory downloaded from GitHub.
+4. The Macro should now appear when hovering over the "Macro" bar at the top.
 
 ![alt text](https://github.com/hen900/klayout_macros/blob/main/img_docs/importing_macro.jpg?raw=true)
 
