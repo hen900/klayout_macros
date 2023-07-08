@@ -8,15 +8,22 @@ The program is designed to run as a macro within the KLayout layout editor. It a
 ## Running the Program
 To run the program, follow these steps:
 
-1. Clone this repository
+1. Clone this repository <br>
+
+   `git clone https://github.com/hen900/klayout_macros/tree/main`
+   
 2. Open the "Macro Development" menu in KLayout and select the "Add Location" option using right-click.
+   
 3. Add the location of the `device_tiler_macro` directory downloaded from GitHub.
+  
 4. The Macro should now appear when hovering over the "Macro" bar at the top.
 
+### Importing into Klayout
 ![alt text](https://github.com/hen900/klayout_macros/blob/main/img_docs/importing_macro.jpg?raw=true)
 
 
-> **Note on KLayout Coordinate System**  
+> **Note on KLayout Coordinate System**
+> 
 > Throughout the entirety of this program and documentation, whenever an object is referenced by its coordinates, the values for x and y are based on the position of the **lower left-hand corner** of the object and referred to in microns.
 
 ---
@@ -34,6 +41,8 @@ To run the program, follow these steps:
 **Y Pitch:** Field to specify the vertical height of each subcell to be tiled (um).  
 
 **X Pitch:** Field to specify the width of each subcell to be tiled (um).
+
+### Example of Cell Parameters
 ![alt text](https://github.com/hen900/klayout_macros/blob/main/img_docs/ez_cell_params.jpg?raw=true)
 
 ---
@@ -48,6 +57,7 @@ To run the program, follow these steps:
 * Markers will be placed in a line, and this specifies where the lower left coordinate of the line of markers should be.
 
 **Marker Gap:** Field to specify the desired horizontal gap between consecutive markers in um.
+
 ![alt text](https://github.com/hen900/klayout_macros/blob/main/img_docs/marker_placement.jpg?raw=true)
 
 ### Marker Movement In Output
